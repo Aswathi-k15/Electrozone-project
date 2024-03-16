@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+        <script src="https://fontawesome.com/icons/bootstrap?f=brands&s=solid"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}"/>
+      <style>
+        .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-left: 120px;
+}
+
+.card {
+    flex: 1 1 30%;
+    max-width: 25rem;
+    box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+    border-radius: .5rem;
+    border: .1rem solid rgba(0, 0, 0, .1);
+    overflow: hidden;
+    height: 40rem;
+}
+
+.card img {
+    height: 25rem;
+    object-fit: contain;
+    padding:10px;
+    width:250px;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+}
+
+.card .icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--pink);
+}
+
+.card .icons a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.card .icons a:hover {
+    background: #333;
+}
+         .products .card-container .card .discount {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: .7rem 1rem;
+            font-size: 2rem;
+            color: var(--pink);
+            background: rgba(255, 51, 153, .05);
+            z-index: 1;
+            border-radius: .5rem;}
+
+    input[type="text"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-right: 8px;
+        width: 200px;
+    }
+
+    button[type="submit"] {
+        padding: 8px 16px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+                @media (max-width: 768px) {
+        .card {
+            flex: 1 1 calc(50% - 1.5rem);
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card {
+            flex: 1 1 100%;
+        }
+    }
+                 .image-container {
+    position: relative;
+}
+
+.background-image {
+
+    display: block;
+
+}
+
+    </style>
+
+</head>
+
+<body>
+<header>
+       <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fa fa-bars"></label>
+        <a href="/" class="logo">electrozone<span>.</span></a>
+        <nav class="navbar">
+            <ul>
+
+           <form id="myForm"  class="form-inline my-5 my-lg-0" action="/search" method="POST" style="margin-right:100px;">
+               {% csrf_token %}
+               <input  type="text" name="product_name" value="{{ request.POST.product_name }}" placeholder="Search.." aria-label="Search">
+               <button type="submit">Search</button>
+
+
+           </form>
+                </ul>
+
+
+
+            <a href="#products">products</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle" type="choose" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                  Category</a>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                    {% for x in main %}
+                  <li><a class="dropdown-item" value="{{x.maincategory_id}}" href="category/{{x.maincategory_id}}">{{x.maincategory_name}}</a></li>
+                    {% endfor %}
+
+                </ul>
+              </div>
+
+        </nav>
+        <div class="icon">
+            <a href="wishlist" style="color: red;" class="fa fa-heart"></a>
+            <a href="cart" class="fa fa-shopping-cart"></a>
+            <a href="profile" class="fa fa-user"></a>
+        </div>
+</header><br><br><br><br><br><br><br>
+<form method="POST" id="myForms">
+    {% csrf_token %}
+    <div class="d-flex my-4 flex-wrap ">
+           <div class="box me-2 my-1 bg-purple ">
+    <div class="dropdown">
+        <a href="#" style="text-decoration:none; color:black; font-size:15px; margin-left:20px; " class="dropdown-toggle" type="choose"  id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false"><b>Sort by</b></a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                    <li><input type="hidden" class="dropdown-item" name="sort_option" id="sort_option" value=""></li>
+                    <li><button type="button" class="dropdown-item" onclick="setSortOption('low_to_high')"> Low to High</button></li>
+                    <li><button type="button" class="dropdown-item" onclick="setSortOption('high_to_low')"> High to Low</button></li>
+                </ul>
+    </div>
+           </div>
+        <div class="box me-4 my-1 bg-purple">
+                           <input type="hidden" name="sort_arrival" id="sort_arrival"  value="">
+        <button style="text-decoration:none; color:black; font-size:15px; background-color: white; border:none; "  type="button" class="dropdown-item"  onclick="setSortArrival('created_date')"><b>New Arrivals</b></button>
+               </div>
+        <div class="box me-4 my-1 bg-purple">
+
+    <div class="dropdown">
+        <a href="#" style="text-decoration:none; color:black; font-size:15px; " class="dropdown-toggle" type="choose"  id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false"><b>Discount</b></a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                    <li><input type="hidden" class="dropdown-item" name="sort_discount" id="sort_discount" value=""></li>
+                    <li><button type="button" class="dropdown-item" onclick="setSortDiscount(20)">Under 20%</button></li>
+                    <li><button type="button" class="dropdown-item" onclick="setSortDiscount(50)"> Under 50%</button></li>
+                    <li><button type="button" class="dropdown-item" onclick="setSortDiscount(50)"> Under 80%</button></li>
+
+                </ul>
+    </div></div></div>
+    </form>
+<section class="products" id="products">
+        <h1 class="heading">Shop<span>Now</span></h1>
+        <div class="card-container">
+            {% for x in products %}
+            <div class="card">
+                {% for offer in x.offer.all %}
+                <span class="discount">{{offer.discount}}%</span>
+                 {% endfor %}
+                <a href="/view_product/{{x.product_id}}">
+                    {% for image in x.images.all|slice:":1" %}
+                    <img src="{{ image.image.url }}" alt="">
+                {% endfor %}
+                </a>
+                <div class="card-body">
+                    <h4 class="card-title"><b>{{x.product_name}}</b></h4>
+                    <h5 class="card-text"> <b>₹{{x.price}}</b><span></span></h5>
+                    <div class="icons">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ x.product_id }}">
+                        <button type="submit" name="wishlist" style="border:none;  background-color: var(--pink); text-decoration: none;" class="fa fa-heart"></button>
+                            </form>
+                        <a href="#" class="cart-btn">Shop now</a>
+                        <a href="#" class="fa fa-share" id="share-btn" data-product-id="{{ x.product_id}}"></a>                    </div>
+                </div>
+            </div>
+             {% endfor %}
+        </div>
+
+    </section>
+<section class="products" id="products">
+        <div class="card-container">
+            {% for x in discount %}
+            <div class="card">
+                <span class="discount">{{x.discount}}%</span>
+                <a href="view_product/{{x.product_id}}">
+                    <img src="{{ x.product_id.images.first.image.url }}" alt="">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{x.product_id.product_name}}</h5>
+                    <h5 class="card-text"> ₹{{x.product_id.price}}<span></span></h5>
+                    <div class="icons">
+                        <a href="#" class="fa fa-heart"></a>
+                        <a href="#" class="cart-btn">Add to Cart</a>
+                        <a href="#" class="fa fa-share" id="share-btn" data-product-id="{{ x.product_id}}"></a>                    </div>
+                </div>
+            </div>
+             {% endfor %}
+        </div>
+
+    </section>
+
+<script>
+  function setSortOption(option) {
+    document.getElementById('sort_option').value = option;
+    document.getElementById('myForms').submit();
+  }
+     function setSortDiscount(options) {
+    document.getElementById('sort_discount').value = options;
+    document.getElementById('myForms').submit();
+  }
+     function setSortArrival(optionss) {
+     console.log(optionss);
+    document.getElementById('sort_arrival').value = optionss;
+    document.getElementById('myForms').submit();
+  }
+   document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.fa-share').forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            var productId = this.getAttribute('data-product-id');
+            var productUrl = window.location.origin + '/product/' + productId;
+
+            if (navigator.share) {
+                navigator.share({ title: 'Check out this product!', text: 'I found this amazing product. Check it out!', url: productUrl })
+                    .then(() => console.log('Shared successfully'))
+                    .catch((error) => console.error('Error sharing:', error));
+            } else {
+                alert('Share functionality is not supported in your browser.');
+            }
+        });
+    });
+});
+
+</script>
+</body>
+
+</html>
+

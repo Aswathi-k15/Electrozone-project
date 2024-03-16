@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+        <script src="https://fontawesome.com/icons/bootstrap?f=brands&s=solid"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}"/>
+      <style>
+        .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-left: 120px;
+}
+
+.card {
+    flex: 1 1 30%;
+    max-width: 25rem;
+    box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+    border-radius: .5rem;
+    border: .1rem solid rgba(0, 0, 0, .1);
+    overflow: hidden;
+    height: 40rem;
+}
+
+.card img {
+    height: 25rem;
+    object-fit: contain;
+    padding:10px;
+    width:250px;
+}
+
+.card:hover img {
+    transform: scale(1.1);
+}
+
+.card .icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--pink);
+}
+
+.card .icons a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.card .icons a:hover {
+    background: #333;
+}
+         .products .card-container .card .discount {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: .7rem 1rem;
+            font-size: 2rem;
+            color: var(--pink);
+            background: rgba(255, 51, 153, .05);
+            z-index: 1;
+            border-radius: .5rem;
+        }
+         form {
+        display: flex;
+        align-items: center;
+    }
+
+    input[type="text"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-right: 8px;
+        width: 200px;
+    }
+
+    button[type="submit"] {
+        padding: 8px 16px;
+        border-color: black;
+        color: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #45a049;
+    }
+          @media (max-width: 768px) {
+        .card {
+            flex: 1 1 calc(50% - 1.5rem);
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card {
+            flex: 1 1 100%;
+        }
+    }
+    </style>
+
+</head>
+
+<body>
+<header>
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fa fa-bars"></label>
+        <a href="/" class="logo">electrozone<span>.</span></a>
+        <nav class="navbar">
+            <ul>
+
+           <form id="myForm"  class="form-inline my-5 my-lg-0" action="/search"  method="POST" style="color:black;">
+               {% csrf_token %}
+               <input  type="text" name="product_name" value="{{ request.POST.product_name }}" placeholder="Search.." aria-label="Search" style="color:black;">
+               <button type="submit" style="color:black;">Search</button>
+               <input type="hidden" name="sort_option" id="sort_option" value="">
+               <input type="hidden" name="sort_discount" id="sort_discount"  value="">
+               <input type="hidden" name="sort_arrival" id="sort_arrival"  value="">
+
+           </form>
+                </ul>
+
+
+        </nav>
+        <div class="icon">
+            <a href="wishlist" style="color: red;" class="fa fa-heart"></a>
+            <a href="cart" class="fa fa-shopping-cart"></a>
+            <a href="profile" class="fa fa-user"></a>
+        </div>
+
+    </header><br> <br>
+    <br>
+    <br>
+    <br><br><br>
+ <section class="products" id="products">
+        <h1 class="heading">Shop<span>Now</span></h1>
+        <div class="card-container">
+            {% for x in product %}
+            <div class="card">
+                {% for offer in x.offer.all %}
+                <span class="discount">{{offer.discount}}%</span>
+                 {% endfor %}
+                <a href="view_product/{{x.product_id}}">
+                    {% for image in x.images.all|slice:":1" %}
+                    <img src="{{ image.image.url }}" alt="">
+                {% endfor %}
+                </a>
+                <div class="card-body">
+                    <h3 class="card-title"><b>{{x.product_name}}</b></h3>
+                    <h4 class="card-text"> ₹{{x.price}}<span></span></h4><br>
+                    <div class="icons">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ x.product_id }}">
+                        <button type="submit" name="wishlist" style="border:none;  background-color: var(--pink); text-decoration: none;" class="fa fa-heart"></button>
+                            </form>
+                        <a href="#" class="cart-btn">Shop Now</a>
+                        <a href="#" class="fa fa-share" id="share-btn" data-product-id="{{ x.product_id}}"></a>                    </div>
+                </div>
+            </div>
+             {% endfor %}
+        </div>
+
+    </section>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.fa-share').forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            var productId = this.getAttribute('data-product-id');
+            var productUrl = window.location.origin + '/product/' + productId;
+
+            if (navigator.share) {
+                navigator.share({ title: 'Check out this product!', text: 'I found this amazing product. Check it out!', url: productUrl })
+                    .then(() => console.log('Shared successfully'))
+                    .catch((error) => console.error('Error sharing:', error));
+            } else {
+                alert('Share functionality is not supported in your browser.');
+            }
+        });
+    });
+});
+</script>
+</body>
+
+</html>
+

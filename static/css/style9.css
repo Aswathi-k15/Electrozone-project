@@ -1,0 +1,107 @@
+        .checkout .form-control{
+    border-radius: 0px;
+}
+.checkout .form-control:focus{
+    border: 1px solid rgb(136, 20, 99) ;
+   box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1)
+}
+.checkout .nav-link{
+    border: 1px solid rgb(136, 20, 99);
+    border-radius: 0px;
+    margin-bottom: 8px;
+}
+.checkout .tab-content{
+    padding-right: 10px;
+}
+         body {
+            background-color: #f8f9fa;
+        }
+
+        .checkout {
+            padding: 3rem 0 4rem;
+        }
+
+        h4 {
+            color: #882063;
+        }
+
+        hr {
+            border-top: 1px solid #882063;
+        }
+
+        .shadow-box {
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .item-total {
+            color: #0056b3;
+        }
+
+        .address-container {
+            margin-top: 1.5rem;
+        }
+
+        .address {
+            margin-bottom: 1rem;
+        }
+
+        .address input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+
+
+        body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    background-color: #ffffff;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h4 {
+    color: #881057; /* Dark magenta */
+}
+
+.text-primary {
+    color: #0056b3; /* Blue */
+}
+
+hr {
+    border-top: 1px solid #881057; /* Dark magenta */
+}
+
+.shadow-box {
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.address input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+
+/* Style for form inputs */
+form input[type="number"],
+form input[type="submit"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+}
+
+/* Style for radio button labels */
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-e5CSnlE2WOr59VbOjsUWKrETVO4TUn0dKrVKnhJ1I9KE1cS+nzUqF3d0fBjk/AE2"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Bootstrap JavaScript (popper.js is required) -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+
+</head>
+<body>
+ <div class="container justify-content-center align-items-center  ">
+        <div class="row d-flex justify-content-center align-items-center h-20 w-80">
+            <div class="col-md-4 px-2 py-4 Signup">
+                <h2 class="text-center">ADD PRODUCT</h2>
+                <form class="login-form" method="POST">
+                    <div class="form-group">
+
+                        <div class="form-outline mb-3">
+                            {% csrf_token %}
+
+                            <label class="form-label" for="product_name">Product Name</label>
+                            <input type="text" id="product_name" name="product_name" class="form-control" placeholder=""
+                                required />
+                        </div>
+
+                        <div class="form-outline mb-3">
+                            <label class="form-label" for="description">Description</label>
+                            <input type="textarea" id="description"  name="description" class="form-control" placeholder=""
+                                required />
+                        </div>
+                        <div class="form-outline mb-3">
+                            <label class="form-label" for="price">Price</label>
+                            <input type="text" id="price" name="price" class="form-control" placeholder="₹"
+                                required />
+                        </div>
+                        <label>Subcategory</label>
+                        <select name='subcategory'  required maxlength="20" value="{{ x.subcategory_name }}">
+                            {% for x in subcategory %}
+                            <option value="{{ x.subcategory_id }}">{{ x.subcategory_name }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="text-center pt-1 mb-2 pb-1">
+                            <center><button type="submit" class="btn btn-login float-center">ADD PRODUCT</button></center>
+                        </div>
+<!--                        <div class="dropdown">-->
+<!--                            <a href="#" class=" dropdown-toggle" type="choose" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">Add More Details</a>-->
+<!--                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">-->
+<!--                                <li><a class="dropdown-item" href="image">Image</a></li>-->
+<!--                                <li><a class="dropdown-item" href="#">Specification</a></li>-->
+<!--                                <li><a class="dropdown-item" href="#">Tv</a></li>-->
+<!--                                <li><a class="dropdown-item" href="#">Headphones</a></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

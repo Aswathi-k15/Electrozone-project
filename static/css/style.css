@@ -1,0 +1,88 @@
+
+    /* ... (previous styles) ... */ */
+        /* .banner-sec {
+                background: url() no-repeat left bottom;
+                background-size: cover; /* Use 'cover' to ensure the image covers the entire container
+                height: 200px;
+                border-radius: 0 10px 10px 0;
+                padding: 0;
+                width: 100%; /* Use percentage-based width for responsiveness */
+        /* } */
+
+        */ .carousel-inner {
+            border-radius: 0 10px 10px 0;
+            width: 100%;
+            /* Use percentage-based width for responsiveness */
+            height: auto;
+            /* Allow the height to adjust according to the content */
+        }
+
+        .carousel-inner img {
+            max-width: auto;
+            height: auto;
+        }
+
+        .login-sec {
+            padding: 50px 30px;
+            position: relative;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .btn-login {
+            background: #DE6262;
+            color: #fff;
+            font-weight: 600;
+            margin-top: 30PX;
+            /* Adjust margin as needed */
+            /* Adjust margin as needed */
+        }
+
+        h6 {
+            color: rgb(128, 39, 105);
+            text-align: center;
+            margin-left: 28px;
+            text-decoration: none;
+        }
+
+        /* Add media queries for responsiveness */
+        @media (max-width: 768px) {
+            .banner-sec {
+                height: 150px;
+                /* Adjust height for smaller screens */
+            }
+
+            .carousel-inner {
+                height: auto;
+                /* Allow the height to adjust according to the content */
+            }
+
+            .btn-login {
+                text-align: center;
+                margin-left: 0px;
+                /* Adjust margin for smaller screens */
+                margin-top: 15px;
+                /* Adjust margin for smaller screens */
+            }
+        }
+        small{
+            text-decoration: none;
+        }
+
+
+        .banner-text {
+            color: black;
+
+            margin-top: 50px;
+            margin-bottom: 200px;
+            margin-right: 500px;
+            margin-left: 10px;
+        }
+
+        .form-check {
+            color: rgb(216, 15, 15);
+            text-decoration: none;
+
+        }

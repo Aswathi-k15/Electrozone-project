@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+        <script src="https://fontawesome.com/icons/bootstrap?f=brands&s=solid"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/icons/tryit.asp?icon=fas_fa-house-user&unicon=f965">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style7.css' %}"/>
+        <link rel="stylesheet" href="{% static 'css/style8.css' %}"/>
+    <style>
+          table, th, td {
+  border: 1px solid black;
+}
+      body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 80%;
+            max-width: 800px;
+            border-collapse: collapse;
+            margin-top: 20px;
+             justify-content: center;
+            align-items: center;
+
+
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            min-width: 120px;
+        }
+
+        .dropdown-item {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynav"
+                aria-controls="mynav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <div class="d-flex">
+                    <div class="d-flex align-items-center logo bg-purple">
+                        <div class="fab fa- h2 text-white">EZ</div>
+                    </div>
+                    <div class="ms-3 d-flex flex-column">
+                        <div class="h4">ELECTROZONE</div>
+                        <div class="fs-6">My Electronics App</div>
+                    </div>
+                </div>
+            </a>
+            <div class="collapse navbar-collapse" id="mynav">
+                <form class="form-inline my-3 my-lg-0"  method="POST" >
+                        {% csrf_token %}
+                        <input  type="text" name="product_name" value="{{ request.POST.product_name }}" style="margin-left:200px;" placeholder="Search.." aria-label="Search">
+                        <button type="submit" style="color:black;" name="search"><b>Search</b></button>
+                    </form>
+            </div>
+            <div class="collapse navbar-collapse" id="mynav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        {% for x in seller %}
+                        <a class="nav-link " href="#"> <span class="fas fa-user pe-2"></span> Hello {{x.seller_name}}</a>
+                        {% endfor %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-3 my-lg-0 my-md-1">
+                <div id="sidebar" class="bg-purple">
+                    <div class="h4 text-white"></div>
+                    <ul>
+                        <li>
+                            <a href="seller_home" class="text-decoration-none d-flex align-items-start">
+                                <div class="far fa-address-book pt-2 me-3"></div>
+                                <div class="d-flex flex-column">
+                                    <div class="link">Dashboard</div>
+                                    <div class="link-desc">Seller</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li >
+                            <a href="producthome" class="text-decoration-none d-flex align-items-start">
+                                <div class="fas fa-box pt-2 me-3"></div>
+                                <div class="d-flex flex-column">
+                                    <div class="link">Product</div>
+                                    <div class="link-desc">Add & Update product</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="offerhome" class="text-decoration-none d-flex align-items-start">
+                                <div class="fas fa-box-open pt-2 me-3"></div>
+                                <div class="d-flex flex-column">
+                                    <div class="link"> Offers</div>
+                                    <div class="link-desc">View offers </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="text-decoration-none d-flex align-items-start">
+                                <div class="fas fa-box-open pt-2 me-3"></div>
+                                <div class="d-flex flex-column">
+                                    <div class="link"> Orders</div>
+                                    <div class="link-desc">View orders </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'logouts' %}" class="text-decoration-none d-flex align-items-start">
+                                <div class="fas fa-headset pt-2 me-3"></div>
+                                <div class="d-flex flex-column">
+                                    <div class="link">Logout</div>
+                                    <div class="link-desc"></div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9 my-lg-0 my-1">
+                <div id="main-content" class="bg-white border">
+<!--                    <div class="d-flex my-4 flex-wrap ">-->
+<!--                        <div class="box me-2 my-1 bg-purple ">-->
+<!--                            <a href="add_product" style=" text-decoration: none;">-->
+<!--                                <h6 class="me-2 my-3" >ADD PRODUCT</h6></a>-->
+<!--                        </div>-->
+<!--                        <div class="box me-4 my-1 bg-purple">-->
+<!--                            <h6 class="me-2 my-3"  >VIEW PRODUCT</h6>-->
+<!--                        </div>-->
+<!--                        <div class="box me-4 my-1 bg-purple">-->
+<!--                            <h6 class="me-2 my-3"  >ADD PRODUCT</h6>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--      <button type="submit" style=" margin-left:30px; border:none; border-radius:5px; width:250px; height:50px; background-color:blue; color:white;">ADD PRODUCT</button>-->
+
+                    <form method="POST">
+  <table align="center" bgcolor="lightgray" style="width:100%;">
+  <tr>
+     <td style="color:rgb(123, 31, 177);"><b>Id</b></td>
+    <td style="color:rgb(123, 31, 177);"><b>Discount</b></td>
+    <td style="color:rgb(123, 31, 177);"><b>Event Name</b></td>
+    <td style="color:rgb(123, 31, 177);"><b>Product Name</b></td>
+
+
+      <td style="color:rgb(123, 31, 177);"><b>Actions</b></td>
+
+  </tr>
+    {% for x in offer %}
+      <tr>
+        <td>{{x.offer_id}}</td>
+
+    <td>{{x.discount}}</td>
+    <td>{{x.event_id.event}}</td>
+
+        <td>{{x.product_id}}</td>
+
+
+
+
+        <td><a style="text-decoration:none;" href="/seller/remove_offer/{{x.offer_id}}"> Remove</a>
+                       <a style="text-decoration:none;" href="/seller/update_offer/{{x.offer_id}}">{{x.offer_id.product_id}}Update</a>
+
+
+
+
+        </td>
+  </tr>
+    {% endfor %}
+</table>
+</form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+ h6{
+                 text-decoration: none;
+
+                color:white;
+            }
+.content {
+      display: none;
+    }
+button{
+display:inline-block;
+}
+#button-content .button{
+position:fixed;
+}
+ header #toggler:checked~.navbar {
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            }
+
+            header .navbar a {
+                margin: 1.5rem;
+                padding: 1.5rem;
+                background: #fff;
+                border: .1rem solid rgba(0, 0, 0, .1);
+                display: block;
+
+            }

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+        <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+        <script src="https://fontawesome.com/icons/bootstrap?f=brands&s=solid"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <title>Document</title>
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style6.css' %}"/>
+        <link rel="stylesheet" href="{% static 'css/style1.css' %}"/>
+
+
+</head>
+<body>
+<header>
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fa fa-bars"></label>
+        <a href="/" class="logo">electrozone<span>.</span></a>
+     <nav class="navbar" style="margin-left:300px;">
+
+            <a href="#products">products</a>
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle" type="choose" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                  Category</a>
+
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                    {% for x in main %}
+                  <li><a class="dropdown-item" value="{{x.maincategory_id}}" href="/category/{{x.maincategory_id}}">{{x.maincategory_name}}</a></li>
+                    {% endfor %}
+
+                </ul>
+              </div>
+
+        </nav>
+     <div class="icon">
+            <a href="wishlist" style="color: red;" class="fa fa-heart"></a>
+            <a href="cart" class="fa fa-shopping-cart"></a>
+                     <a href="profile" class="fa fa-user"></a>
+
+        </div>
+    </header><br><br>
+
+    <div class="main-wrapper">
+                    {% csrf_token %}
+
+        <div class="container">
+            <div class="product-div">
+                {% for x in product %}
+
+                <div class="product-div-left">
+                    <div  class="img-container">
+                        <div class="hover-container">
+                        {% for image in x.images.all|slice:":1" %}
+
+                        <img src="{{ image.image.url }}" alt="mobileimg"  style="height:300px; width:300px;">
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="hover-container">
+                        {% for image in x.images.all %}
+
+                        <div>
+                            <img src="{{ image.image.url }}">
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="product-div-right">
+                    <form method="POST" >
+                                    {% csrf_token %}
+                        <input type="text" value="Nooo" name="not_go" hidden="hidden">
+
+                    <span class="product-name" style="color:blue">{{x.product_name}}</span>
+                                            <span class="product-price">₹{{x.price}}</span>
+
+                    <h5 class="product-description">{{x.description}}</h5>
+
+                        <h5>Quantity</h5>
+                        <input type="number" name="quantity" min="1" max="5" value="1">
+                    <div class="product-rating">
+                        <span><i class="fa fa-star"></i></span>
+                        <span><i class="fa fa-star"></i></span>
+                        <span><i class="fa fa-star"></i></span>
+                        <span><i class="fa fa-star"></i></span>
+                        <span><i class="fa fa-star-half"></i></span>
+                        <span>(250 ratings)</span>
+                    </div>
+                    {% for mobile in x.mobiles.all %}
+
+                    <span class="product-price"><b>Color:</b>{{mobile.color}}</span>
+                    <span class="product-price"><b>Storage:</b>{{mobile.storage}}</span>
+                    <span class="product-price"><b>Warranty:</b>{{mobile.warranty}}</span>
+
+                    {% endfor %}
+                    {% for tv in x.tv.all %}
+                    <span class="product-price"><b>Size:</b>{{tv.size}}</span>
+                    <span class="product-price"><b>Sound output:</b>{{tv.sound_output}}</span>
+                    <span class="product-price"><b>Warranty:</b>{{tv.warranty}}</span>
+                    {% endfor %}
+                     {% for headphone in x.headphone.all %}
+                    <span class="product-price"><b>Color:</b>{{headphone.color}}</span>
+                    <span class="product-price"><b>Sound output:</b>{{headphone.sound_output}}</span>
+                    <span class="product-price"><b>Warranty:</b>{{headphone.warranty}}</span>
+                    {% endfor %}
+
+
+                    <div class="btn-groups">
+
+
+                        <button type="submit" name="add_to_cart" onclick="addToCart()" class="add-cart-btn"><i class="fa fa-shopping-cart">Add to Cart</i></button>
+                        <button type="submit" name="buy_now" onclick="buyNow()" class="buy-now-btn"><i class="fa fa-wallet">Buy Now</i></button>
+
+
+                    </div><br>
+                        <a href="/add_review/{{x.product_id}}" style="text-decoration:none;"><h4>Add Your Review</h4></a><br><br>
+                    <h3 style="color:blue;">Reviews</h3>
+                {% for review in x.review.all %}
+                                                <h5><b>-{{review.user_id.user_name}}</b></h5>
+
+                <h5>{{review.review}}</h5><hr>
+                {% endfor %}
+                    </form>
+
+                </div>
+
+            </div> {% endfor %}
+        </div>
+    </div>
+
+    <script>
+<!--        function addToCart() {-->
+<!--            document.getElementById("myForm").action = "/cart";-->
+<!--            document.getElementById("myForm").submit();-->
+<!--        }-->
+
+<!--        function buyNow() {-->
+<!--            document.getElementById("myForm").action = "/order";-->
+<!--            document.getElementById("myForm").submit();-->
+<!--        }-->
+        const allHoverImages = document.querySelectorAll('.hover-container div img')
+        const imgContainer = document.querySelector('.img-container');
+        window.addEventListener('DOMContentLoaded',()=>{allHoverImages[0].parentElement.classList.add('active');});
+        allHoverImages.forEach((image)=>{image.addEventListener('mouseover',()=>{imgContainer.querySelector('img').src=image.src;
+        resetActiveImg();
+        image.parentElement.classList.add('active');
+    });
+    });
+    function resetActiveImg(){
+        allHoverImages.forEach((img)=>{
+            img.parentElement.classList.remove('active');
+        });
+    }
+    </script>
+</body>
+</html>

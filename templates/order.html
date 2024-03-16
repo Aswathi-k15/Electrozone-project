@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ecommerce Cart/Wishlist Page Design</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+       body {
+    background-color: #f8f9fa;
+}
+
+.checkout {
+    padding: 3rem 0 4rem;
+}
+
+.container {
+    background-color: #fff;
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+h4 {
+    color: rgb(136, 20, 99);
+}
+
+.text-primary {
+    color: #0056b3;
+}
+
+hr {
+    border-top: 1px solid #882063;
+}
+
+.shadow-box {
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.address-container {
+    margin-top: 1.5rem;
+}
+
+.address input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+
+
+/* Responsive styles for small screens */
+@media (max-width: 576px) {
+    .container {
+        padding: 1rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="py-3 py-md-4 checkout">
+
+        <div class="container">
+
+            <h4 style="color:rgb(136, 20, 99);">Checkout</h4>
+            <hr>
+{% for x in order %}
+            <div class="row" >
+                <div class="col-md-12 mb-4" >
+                    <div class="shadow  p-3"  style="background-color:pink;" >
+                        <h4 class="text-primary">
+                            Item Total Amount :
+                            <span class="float-end">₹{{x.price}}</span>
+                        </h4>
+                        <hr>
+                        <small>* Items will be delivered in 3 - 5 days.</small>
+                        <br/>
+                        <small>* Tax and other charges are included ?</small>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="shadow  p-3"  style="background-color:pink;">
+                        <h4 class="text-primary">
+                            Choose Address
+                        </h4>
+                        <hr>
+
+                        <form action="" method="POST" name="choose_address">
+                            {% csrf_token %}
+                            {% for x in address %}
+                           <br>
+                            <h6>{{x.house_name}}</h6>
+                            <h6>{{x.city_name}},{{x.landmark}}</h6>
+                            <h6>{{x.district}},{{x.state}}</h6>
+                            <h6>{{x.post_office}},{{x.pin}}</h6><br>
+
+                            <label>
+                            <input type="radio" name="address" value="{{x.address_id}}">
+                            </label>
+                            <hr>
+
+
+                            {% endfor %}
+                            <input type="number" name="quantity" value="{{quantity}}">
+                               <input type="submit" name="oder_btn" value="Order">
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
